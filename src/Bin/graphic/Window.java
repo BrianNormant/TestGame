@@ -12,13 +12,28 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Window {
 
+    //Property
     public final long id;
     public int width, height;
     public String label;
     private final float fieldOfView = 60f, zNear = 0.0001f, zFar = 1000f;
     Matrix4f projectionMatrix;
     public volatile boolean keepOn = true;
+    private RenderInstruction instruction;
 
+    //Constructor
+    public Window(int width, int height, String label) {
+        setDefaultParameters();
+        this.width = width;
+        this.height = height;
+        this.label = label;
+        id = glfwCreateWindow(width, height, label, NULL, NULL);
+
+        initOpenGL();
+
+        initRender();
+    }
+    //Methods
     private void updateProjectionMatrix() {
         float aspectRatio = width/(float)height;
         projectionMatrix = new Matrix4f().perspective(fieldOfView, aspectRatio, zNear, zFar);
@@ -51,34 +66,29 @@ public class Window {
         glEnable(GL_DEPTH_TEST);
     }
 
-    public Window(int width, int height, String label) {
-        setDefaultParameters();
-        this.width = width;
-        this.height = height;
-        this.label = label;
-        id = glfwCreateWindow(width, height, label, NULL, NULL);
-
-        initOpenGL();
-
-        initRender();
-    }
-
     public boolean isKeyPressed(int key) {
         return glfwGetKey(id, key)== GLFW_PRESS;
     }
-    public void preRender() {
-        glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
+    public void render(Player player, Mouse mouse) {
+        while (!glfwWindowShouldClose(this.id)) {
+            glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
-    }
-    public void postRender(Player player, Mouse mouse) {
-        glfwSwapBuffers(id);
-        glfwPollEvents();
-        Control.camera(player.getCamera(), mouse, this);
-        Control.player(player, mouse, this);
-        keepOn = !glfwWindowShouldClose(id);
-    }
+            instruction.render();
 
+            glfwSwapBuffers(id);
+            glfwPollEvents();
+            Control.camera(player.getCamera(), mouse, this);
+            Control.player(player, mouse, this);
+            keepOn = !glfwWindowShouldClose(id);
+        }
+    }
+    //Getters
     public Matrix4f getProjectionMatrix() {
         return projectionMatrix;
+    }
+    //Setters
+
+    public void setRenderInstruction(RenderInstruction instruction) {
+        this.instruction = instruction;
     }
 }

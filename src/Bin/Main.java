@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Main {
     public static final String resourceRoot;
     static {
-        File temp = new File("temp");
+        File temp = new File("temp.txt");
         if (!temp.exists()) {
             try {
                 temp.createNewFile();
@@ -25,8 +25,9 @@ public class Main {
                 exception.printStackTrace();
             }
         }
-        resourceRoot = temp.getAbsolutePath().replace("\\temp","")+"\\resource\\";
+        resourceRoot = temp.getAbsolutePath().replace("\\temp.txt","")+"\\resource\\";
         System.out.println(resourceRoot);
+        temp.delete();
     }
     public static final Matrix4f projectionMatrix = new Matrix4f().perspective(60,0.5f,0.01f,1000);
     public static void main(String[] args) {

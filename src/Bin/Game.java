@@ -8,6 +8,7 @@
 
 package Bin;
 
+import Bin.graphic.RenderInstruction;
 import Bin.graphic.Window;
 import Bin.logic.Mouse;
 import Bin.logic.Player;
@@ -16,51 +17,31 @@ import Bin.logic.world.cube.Grass;
 
 import java.util.Scanner;
 
-public class Game implements Runnable {
+public class Game {
     private final Window window;
     private final Player player;
     private final Mouse mouse;
     private final World world;
 
     Game() {
-        window = new Window(720,480,"Game Test");
+        window = new Window(720, 480, "Game Test");
         mouse = new Mouse(window);
         player = new Player(Main.resourceRoot);
         world = new World(5);
     }
+
     void launch() {
         Grass g = new Grass();
-        while (window.keepOn) {
-            window.preRender();
 
+        window.setRenderInstruction(() -> {
             g.render(player.getCamera().getCameraMatrix());
-            player.hotbar.render(window.getProjectionMatrix());
-            //world.compute(player.getCamera().getCameraMatrix());
-            window.postRender(player, mouse);
-        }
+        });
+
+        window.render(player, mouse);
     }
 
     public Window getWindow() {
         return window;
     }
 
-    @Override
-    public void run() {
-        boolean isRunning =true;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Test");
-        int i = 0;
-        do {
-            System.out.print("in["+i+"] ");
-            String instruction = scanner.next();
-            System.out.println("out["+i+"] "+instruction);
-            switch (instruction) {
-                case "close" -> {
-                    window.keepOn = false;
-                    isRunning = false;
-                }
-            }
-            i++;
-        } while (isRunning);
-    }
 }
