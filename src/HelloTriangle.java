@@ -1,23 +1,17 @@
-/*
- * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
- */
-
-import Bin.graphic.Window;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
 
 import static java.sql.Types.NULL;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_CORE_PROFILE;
 import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class HelloTriangle {
@@ -33,6 +27,9 @@ public class HelloTriangle {
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         window = GLFW.glfwCreateWindow(640, 480, "LWJGL Bootcamp", NULL, NULL);
         if(window == NULL) {
@@ -58,11 +55,22 @@ public class HelloTriangle {
 
         GL.createCapabilities();
 
+        float[] vertices = {-0.5f,-0.5f,0f,
+                0.5f, -0.5f, 0f,
+                0f,0.5f,0f};
+        int[] indices = {0,1,2};
+        Mesh meshmeyek = MeshLoader.createMesh(vertices,indices);
+
         while(!GLFW.glfwWindowShouldClose(window)) {
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT| GL11.GL_DEPTH_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+
+            GL30.glBindVertexArray(meshmeyek.getVaoID());
+            GL20.glEnableVertexAttribArray(0);
+            GL11.glDrawElements(GL11.GL_TRIANGLES, meshmeyek.getVertexCount(), GL11.GL_UNSIGNED_INT,0);
+            GL20.glDisableVertexAttribArray(0);
+            GL30.glBindVertexArray(0);
 
             GLFW.glfwSwapBuffers(window);
-
             GLFW.glfwPollEvents();
         }
     }

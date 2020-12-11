@@ -4,6 +4,8 @@ import Bin.logic.Control;
 import Bin.logic.Mouse;
 import Bin.logic.Player;
 import org.joml.Matrix4f;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
 import static java.sql.Types.NULL;
@@ -23,7 +25,19 @@ public class Window {
 
     //Constructor
     public Window(int width, int height, String label) {
-        setDefaultParameters();
+        GLFWErrorCallback.createPrint(System.err).set();
+
+        if(!org.lwjgl.glfw.GLFW.glfwInit()) {
+            throw new IllegalStateException("Unable to initialize GLFW");
+        }
+
+        GLFW.glfwDefaultWindowHints();
+        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         this.width = width;
         this.height = height;
         this.label = label;
