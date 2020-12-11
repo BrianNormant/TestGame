@@ -7,9 +7,56 @@
  */
 
 import Bin.graphic.Window;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.system.MemoryStack;
+
+import java.nio.IntBuffer;
+
+import static java.sql.Types.NULL;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class HelloTriangle {
     //This class is a exemple off how show a triangle on a window.
+    static long window;
     public static void main(String[] args) {
-        Window window = new Window(720,480,"Hello Triangle");
-    }}
+        GLFWErrorCallback.createPrint(System.err).set();
+
+        if(!GLFW.glfwInit()) {
+            throw new IllegalStateException("Unable to initialize GLFW");
+        }
+
+        GLFW.glfwDefaultWindowHints();
+        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
+
+        window = GLFW.glfwCreateWindow(640, 480, "LWJGL Bootcamp", NULL, NULL);
+        if(window == NULL) {
+            throw new IllegalStateException("Unable to create GLFW Window");
+        }
+
+        GLFW.glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {});
+
+        try(MemoryStack stack = stackPush()){
+            IntBuffer pWidth = stack.mallocInt(1);
+            IntBuffer pHeight = stack.mallocInt(1);
+
+            GLFW.glfwGetWindowSize(window, pWidth, pHeight);
+
+            GLFWVidMode vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+
+            GLFW.glfwSetWindowPos(window,(vidmode.width() - pWidth.get(0)) / 2,(vidmode.height() - pHeight.get(0)) / 2);
+
+            GLFW.glfwMakeContextCurrent(window);
+            GLFW.glfwSwapInterval(1);
+            GLFW.glfwShowWindow(window);
+        }
+
+        while (!glfwWindowShouldClose(window)) {
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        }
+    }
+}
