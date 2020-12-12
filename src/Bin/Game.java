@@ -8,14 +8,11 @@
 
 package Bin;
 
-import Bin.graphic.RenderInstruction;
 import Bin.graphic.Window;
 import Bin.logic.Mouse;
 import Bin.logic.Player;
 import Bin.logic.world.World;
 import Bin.logic.world.cube.Grass;
-
-import java.util.Scanner;
 
 public class Game {
     private final Window window;
@@ -26,7 +23,7 @@ public class Game {
     Game() {
         window = new Window(720, 480, "Game Test");
         mouse = new Mouse(window);
-        player = new Player(Main.resourceRoot);
+        player = new Player();
         world = new World(5);
     }
 
@@ -34,7 +31,7 @@ public class Game {
         Grass g = new Grass();
 
         window.setRenderInstruction(() -> {
-            world.compute(player.getCamera().getCameraMatrix());
+            world.compute(player.getViewMatrix());
         });
 
         window.render(player, mouse);

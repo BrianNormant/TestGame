@@ -8,8 +8,8 @@
 
 package Bin.logic.world;
 
-import Bin.lwjgl.ShaderProgram;
 import Bin.logic.world.cube.Grass;
+import Bin.lwjgl.ShaderProgram;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -27,11 +27,11 @@ public class World {
             }
         }
     }
-    public void compute(Matrix4f cameraMatrix) {
+    public void compute(Matrix4f viewMatrix) {
         for (GameItem i: items) {
             if (i instanceof Grass) {
                 Grass g = (Grass) i;
-                g.render(cameraMatrix);
+                g.render(viewMatrix);
             }
         }
     }

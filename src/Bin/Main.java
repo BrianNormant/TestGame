@@ -8,7 +8,6 @@
 
 package Bin;
 
-import Bin.math.Matrix;
 import org.joml.Matrix4f;
 
 import java.io.File;
@@ -29,7 +28,7 @@ public class Main {
         System.out.println(resourceRoot);
         temp.delete();
     }
-    public static final Matrix4f projectionMatrix = new Matrix4f().perspective(60,0.5f,0.01f,1000);
+    public static Matrix4f projectionMatrix = new Matrix4f().perspective(60,0.5f,0.01f,1000);
     public static void main(String[] args) {
         Game instance = new Game();
         instance.launch();

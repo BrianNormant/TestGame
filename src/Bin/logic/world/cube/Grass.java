@@ -16,7 +16,7 @@ public class Grass extends Cube {
     public Grass() {
         super();
     }
-    public void render(Matrix4f cameraMatrix) {
-        super.render(texture, cameraMatrix);
+    public void render(Matrix4f viewMatrix) {
+        super.render(texture, viewMatrix);
     }
 }

@@ -25,7 +25,6 @@ public class Window {
     public String label;
     private final float fieldOfView = 60f, zNear = 0.0001f, zFar = 1000f;
     Matrix4f projectionMatrix;
-    public volatile boolean keepOn = true;
     private RenderInstruction instruction;
 
     //Constructor
@@ -76,6 +75,7 @@ public class Window {
     private void updateProjectionMatrix() {
         float aspectRatio = width/(float)height;
         projectionMatrix = new Matrix4f().perspective(fieldOfView, aspectRatio, zNear, zFar);
+        Bin.Main.projectionMatrix = this.projectionMatrix;
     }
 
     public boolean isKeyPressed(int key) {
@@ -89,8 +89,8 @@ public class Window {
 
             glfwSwapBuffers(id);
             glfwPollEvents();
-            Control.camera(player.getCamera(), mouse, this);
-            Control.player(player, mouse, this);
+            Control.camera(player, mouse, this);
+            Control.player(player, this);
         }
     }
     //Getters

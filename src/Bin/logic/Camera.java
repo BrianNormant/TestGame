@@ -14,26 +14,20 @@ import org.joml.Vector3f;
 
 public class Camera {
     Vector3f position, rotation;
-    Matrix4f cameraMatrix = new Matrix4f().identity();
 
     public Camera() {
         rotation = new Vector3f(0,0,0);
         position = new Vector3f(0);
     }
 
-    public void updateCamera(Player player) {
-        position = player.getPosition();
-        cameraMatrix = new Matrix4f().identity();
-        cameraMatrix.translate( -position.x, -position.y, -position.z);
-        cameraMatrix.rotate(
+    public Matrix4f getViewMatrix() {
+        Matrix4f viewMatrix = new Matrix4f().identity();
+        viewMatrix.translate( -position.x, -position.y, -position.z);
+        viewMatrix.rotate(
                 (float) Math.toRadians(rotation.x), new Vector3f(1,0,0)).rotate(
                 (float) Math.toRadians(rotation.y), new Vector3f(0,1,0)).rotate(
                 (float) Math.toRadians(rotation.z), new Vector3f(0,0,1));
-
-    }
-
-    public Matrix4f getCameraMatrix() {
-        return cameraMatrix;
+        return viewMatrix;
     }
 
     public void setRotation(Vector3f rotation) {

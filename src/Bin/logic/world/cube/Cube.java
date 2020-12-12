@@ -17,7 +17,6 @@ import org.joml.Vector3f;
 
 public class Cube extends GameItem {
     static final Model cubeModel = new Model(Coords.cubeVertices, Coords.cubeIndices, Coords.cubeTexture);
-    public Matrix4f modelViewMatrix = new Matrix4f().identity();
     Vector3f position,rotation;
     float scale;
     public Cube() {
@@ -32,25 +31,27 @@ public class Cube extends GameItem {
         position = new Vector3f(0,0,0);
         rotation = new Vector3f(0,0,0);
         scale = 1.0f;
-        updateModelViewMatrix();
     }
 
     public void setPosition(Vector3f position) {
         this.position = position;
     }
 
-    private void updateModelViewMatrix() {
-        modelViewMatrix = new Matrix4f().identity()
+    public void setRotation(Vector3f rotation) {
+        this.rotation = rotation;
+    }
+
+     Matrix4f getModelViewMatrix(Matrix4f viewMatrix) {
+        Matrix4f transformationMatrix = new Matrix4f().identity()
                 .translate(position).
                         rotateX((float)Math.toRadians(-rotation.x)).
                         rotateY((float)Math.toRadians(-rotation.y)).
                         rotateZ((float)Math.toRadians(-rotation.z)).
                         scale(this.scale);
 
-        modelViewMatrix = modelViewMatrix.mul(Bin.Main.projectionMatrix);
-        //modelViewMatrix = projectionMatrix.mul(modelViewMatrix);
+        return transformationMatrix.mul(viewMatrix);
     }
-    public void render(Texture texture, Matrix4f cameraMatrix) {
-        super.render(texture, modelViewMatrix, cameraMatrix);
+    public void render(Texture texture, Matrix4f viewMatrix) {
+        super.render(texture, getModelViewMatrix(viewMatrix));
     }
 }

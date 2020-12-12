@@ -15,14 +15,14 @@ import org.joml.Matrix4f;
 
 public class GameItem {
     private Model model;
-    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", new String[]{"camera","modelView","texture"});
+    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", new String[]{"projection","modelView","texture"});
     public GameItem(Model model) {
         this.model = model;
     }
     public void changeModel(Model model) {
         this.model = model;
     }
-    public void render(Texture texture, Matrix4f modelViewMatrix, Matrix4f cameraMatrix) {
-        model.render(shader, texture, cameraMatrix, modelViewMatrix);
+    public void render(Texture texture, Matrix4f modelViewMatrix) {
+        model.render(shader, texture, modelViewMatrix);
     }
 }

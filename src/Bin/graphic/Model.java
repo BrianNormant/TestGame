@@ -8,6 +8,7 @@
 
 package Bin.graphic;
 
+import Bin.Main;
 import Bin.lwjgl.Buffer;
 import Bin.lwjgl.ShaderProgram;
 import Bin.lwjgl.VertexArray;
@@ -42,11 +43,11 @@ public class Model {
         glDrawElements(GL_TRIANGLES,length,GL_UNSIGNED_INT,0);
         glBindVertexArray(0);
     }
-    public void render(ShaderProgram shader, Texture texture, Matrix4f projectionMatrix) {
+    public void render(ShaderProgram shader, Texture texture, Matrix4f modelViewMatrix) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture.id);
 
-        shader.use(new Object[]{projectionMatrix, 0});
+        shader.use(new Object[]{Main.projectionMatrix, modelViewMatrix, 0});
 
         VAO.use(length);
     }
