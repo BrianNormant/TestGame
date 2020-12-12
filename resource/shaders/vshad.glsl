@@ -5,7 +5,6 @@ out vec2 textCoord;
 uniform mat4 camera;
 uniform mat4 modelView;
 void main() {
-    //gl_Position = camera*modelView*vec4(position, 1.0f);
-    gl_Position = vec4(position, 1.0f);
+    gl_Position = modelView*camera*vec4(position, 1.0f);
     textCoord = aTextCoord;
 }

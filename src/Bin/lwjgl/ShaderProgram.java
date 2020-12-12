@@ -59,7 +59,6 @@ public class ShaderProgram {
             uniforms.add(u);
         }
     }
-
     public void use(Object[] uniformsData) {
         glUseProgram(getId());
 

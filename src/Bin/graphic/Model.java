@@ -30,15 +30,7 @@ public class Model {
         this.vertices.bufferData(vertices);
         this.texture.bufferData(texture);
 
-        this.VAO = new VertexArray();
-
-        this.VAO.addBuffer(this.indices);
-        this.VAO.addBuffer(this.vertices);
-        this.VAO.addBuffer(this.texture);
-
-        this.indices.delete();
-        this.vertices.delete();
-        this.texture.delete();
+        this.VAO = new VertexArray(this.indices, this.vertices, this.texture);
     }
     public void render(ShaderProgram shader,Texture texture, Matrix4f cameraMatrix, Matrix4f modelViewMatrix) {
         glActiveTexture(GL_TEXTURE0);
@@ -59,6 +51,9 @@ public class Model {
         VAO.use(length);
     }
     public void destroy() {
+        this.indices.delete();
+        this.vertices.delete();
+        this.texture.delete();
         VAO.delete();
     }
 }

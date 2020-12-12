@@ -24,11 +24,12 @@ public class Camera {
     public void updateCamera(Player player) {
         position = player.getPosition();
         cameraMatrix = new Matrix4f().identity();
+        cameraMatrix.translate( -position.x, -position.y, -position.z);
         cameraMatrix.rotate(
                 (float) Math.toRadians(rotation.x), new Vector3f(1,0,0)).rotate(
                 (float) Math.toRadians(rotation.y), new Vector3f(0,1,0)).rotate(
                 (float) Math.toRadians(rotation.z), new Vector3f(0,0,1));
-        cameraMatrix.translate( -position.x, -position.y, -position.z);
+
     }
 
     public Matrix4f getCameraMatrix() {

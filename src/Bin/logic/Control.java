@@ -16,7 +16,7 @@ import org.lwjgl.glfw.GLFWKeyCallbackI;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Control {
-    public static final float DISPLACEMENT_SENSITIVITY = 0.01f;
+    public static final float DISPLACEMENT_SENSITIVITY = 0.1f;
     private static final float ROTATION_SENSITIVITY = 0.5f;
 
     public static GLFWKeyCallbackI windowControl = (window, key, scancode, action, mods) -> {
@@ -53,6 +53,7 @@ public class Control {
         player.displace(positionOffset);
     }
     public static void camera(Camera camera, Mouse mouse, Window keyboard) {
+        mouse.input();
         if (mouse.isLeftButtonPressed()) {
             Vector2f temp = mouse.getDisplVec();
             temp.y *= ROTATION_SENSITIVITY;

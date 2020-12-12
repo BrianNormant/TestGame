@@ -17,15 +17,30 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30.*;
 
 public class VertexArray {
+    //propriete
     private final int id;
     private int pointer = 0;
+
+    //constructeur
+    {
+        id = glGenVertexArrays();
+    }
+    public VertexArray() {}
+    public VertexArray(Buffer indices, Buffer vertices) {
+        addBuffer(indices);
+        addBuffer(vertices);
+    }
+    public VertexArray(Buffer indices, Buffer vertices, Buffer texture) {
+        addBuffer(indices);
+        addBuffer(vertices);
+        addBuffer(texture);
+    }
+    //methods
     private void addLocate(int coordSize) {
         glVertexAttribPointer(pointer, coordSize, GL_FLOAT, false, 0, 0);
         pointer++;
     }
-    public VertexArray() {
-        id = glGenVertexArrays();
-    }
+
     public void addBuffer(Buffer buffer) {
         glBindVertexArray(getId());
         glBindBuffer(buffer.getType(), buffer.getId());
@@ -35,16 +50,22 @@ public class VertexArray {
         glBindVertexArray(0);
         glBindBuffer(buffer.getType(), 0);
     }
+
     public void use(int length) {
         glBindVertexArray(getId());
         for (int i = 0; i < pointer+1; i++) glEnableVertexAttribArray(i);
         glDrawElements(GL_TRIANGLES, length, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
+
     public void delete() {
         glDeleteVertexArrays(getId());
     }
+
+    //getters
     public int getId() {
         return id;
     }
+    //setters
+
 }

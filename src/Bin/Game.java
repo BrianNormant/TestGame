@@ -34,7 +34,7 @@ public class Game {
         Grass g = new Grass();
 
         window.setRenderInstruction(() -> {
-            g.render(player.getCamera().getCameraMatrix());
+            world.compute(player.getCamera().getCameraMatrix());
         });
 
         window.render(player, mouse);

@@ -15,8 +15,6 @@ import Bin.logic.world.GameItem;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import static Bin.Main.projectionMatrix;
-
 public class Cube extends GameItem {
     static final Model cubeModel = new Model(Coords.cubeVertices, Coords.cubeIndices, Coords.cubeTexture);
     public Matrix4f modelViewMatrix = new Matrix4f().identity();
@@ -34,14 +32,14 @@ public class Cube extends GameItem {
         position = new Vector3f(0,0,0);
         rotation = new Vector3f(0,0,0);
         scale = 1.0f;
-        updateModelViewMatrix(projectionMatrix);
+        updateModelViewMatrix();
     }
 
     public void setPosition(Vector3f position) {
         this.position = position;
     }
 
-    private void updateModelViewMatrix(Matrix4f projectionMatrix) {
+    private void updateModelViewMatrix() {
         modelViewMatrix = new Matrix4f().identity()
                 .translate(position).
                         rotateX((float)Math.toRadians(-rotation.x)).
@@ -49,8 +47,8 @@ public class Cube extends GameItem {
                         rotateZ((float)Math.toRadians(-rotation.z)).
                         scale(this.scale);
 
-        //modelViewMatrix = modelViewMatrix.mul(projectionMatrix);
-        modelViewMatrix = projectionMatrix.mul(modelViewMatrix);
+        modelViewMatrix = modelViewMatrix.mul(Bin.Main.projectionMatrix);
+        //modelViewMatrix = projectionMatrix.mul(modelViewMatrix);
     }
     public void render(Texture texture, Matrix4f cameraMatrix) {
         super.render(texture, modelViewMatrix, cameraMatrix);
