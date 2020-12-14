@@ -1,4 +1,4 @@
-package Bin.math;
+package engine.math;
 
 public class Matrix<T> {
     //Properties

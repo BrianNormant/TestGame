@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.graphic;
+package engine.graphic;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 
@@ -17,7 +17,8 @@ import java.nio.ByteBuffer;
 
 import static Bin.Main.resourceRoot;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 public class Texture {
@@ -52,5 +53,13 @@ public class Texture {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, decoder.getWidth(), decoder.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    public void use() {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this.id);
+    }
+    public void endUse() {
+        glBindTexture(GL_TEXTURE_2D,0);
+        glActiveTexture(0);
     }
 }

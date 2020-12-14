@@ -8,33 +8,32 @@
 
 package Bin;
 
-import Bin.graphic.Window;
-import Bin.logic.Mouse;
-import Bin.logic.Player;
-import Bin.logic.world.World;
-import Bin.logic.world.cube.Grass;
+import engine.Camera;
+import engine.Cube;
+import engine.Item;
+import engine.Mouse;
+import engine.graphic.Texture;
+import engine.graphic.Window;
 
 public class Game {
     private final Window window;
-    private final Player player;
     private final Mouse mouse;
-    private final World world;
+    private final Camera camera;
 
     Game() {
         window = new Window(720, 480, "Game Test");
         mouse = new Mouse(window);
-        player = new Player();
-        world = new World(5);
+        camera = new Camera();
     }
 
     void launch() {
-        Grass g = new Grass();
-
+        Cube cube = new Cube(new Texture("diamond"));
         window.setRenderInstruction(() -> {
-            world.compute(player.getViewMatrix());
+            cube.render(camera.getViewMatrix());
+            Item.renderAll(camera.getViewMatrix());
         });
 
-        window.render(player, mouse);
+        window.render(camera, mouse);
     }
 
     public Window getWindow() {

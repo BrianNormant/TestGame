@@ -6,9 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.logic;
+package engine;
 
-import Bin.graphic.Window;
+import engine.graphic.Window;
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 

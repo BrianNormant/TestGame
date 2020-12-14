@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.lwjgl;
+package engine.lwjgl;
 
 import Bin.Main;
 
@@ -21,7 +21,7 @@ public class ShaderProgram {
     private final int id;
     private final Shader vertex, fragment;
     private final ArrayList<Uniform> uniforms = new ArrayList<>();
-    public ShaderProgram(String vertex, String fragment, String[] names) {
+    public ShaderProgram(String vertex, String fragment, String... names) {
         id = glCreateProgram();
 
         this.vertex = new Shader(GL_VERTEX_SHADER);
@@ -52,7 +52,7 @@ public class ShaderProgram {
         this.vertex.delete();
         this.fragment.delete();
     }
-    private void addUniforms(String[] names) {
+    private void addUniforms(String... names) {
         for (String name : names) {
             Uniform u = new Uniform(name);
             u.setId(glGetUniformLocation(getId(), name));
@@ -61,7 +61,6 @@ public class ShaderProgram {
     }
     public void use(Object[] uniformsData) {
         glUseProgram(getId());
-
         for (int i = 0; i < uniforms.size(); i++) {
             uniforms.get(i).setValue(uniformsData[i]);
         }

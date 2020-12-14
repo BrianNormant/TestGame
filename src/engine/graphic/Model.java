@@ -6,12 +6,12 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.graphic;
+package engine.graphic;
 
 import Bin.Main;
-import Bin.lwjgl.Buffer;
-import Bin.lwjgl.ShaderProgram;
-import Bin.lwjgl.VertexArray;
+import engine.lwjgl.Buffer;
+import engine.lwjgl.ShaderProgram;
+import engine.lwjgl.VertexArray;
 import org.joml.Matrix4f;
 
 import static org.lwjgl.opengl.GL15.*;
@@ -21,7 +21,7 @@ public class Model {
     private final VertexArray VAO;
     private final Buffer indices, vertices, texture;
     private final int length;
-    public Model(float[] vertices, int[] indices, float[] texture) {
+    public Model(int[] indices, float[] vertices, float[] texture) {
         length = indices.length;
         this.indices = new Buffer(GL_ELEMENT_ARRAY_BUFFER, 3);
         this.vertices = new Buffer(GL_ARRAY_BUFFER, 3);
@@ -36,18 +36,17 @@ public class Model {
     public void render(ShaderProgram shader,Texture texture, Matrix4f cameraMatrix, Matrix4f modelViewMatrix) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture.id);
-        shader.use(new Object[]{cameraMatrix, modelViewMatrix, 0});
+        shader.use(new Object[]{cameraMatrix, Main.projectionMatrix ,modelViewMatrix, 0});
 
         VAO.use(length);
 
         glDrawElements(GL_TRIANGLES,length,GL_UNSIGNED_INT,0);
         glBindVertexArray(0);
     }
-    public void render(ShaderProgram shader, Texture texture, Matrix4f modelViewMatrix) {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture.id);
+    public void render(ShaderProgram shader, Texture texture, Matrix4f modelMatrix) {
+        texture.use();
 
-        shader.use(new Object[]{Main.projectionMatrix, modelViewMatrix, 0});
+        shader.use(new Object[]{Main.projectionMatrix, modelMatrix, 0});
 
         VAO.use(length);
     }

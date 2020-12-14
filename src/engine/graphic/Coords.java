@@ -6,9 +6,10 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.graphic;
+package engine.graphic;
 
-public class Coords {
+public class
+Coords {
     public static final int[] squareIndices = new int[]{
             0,1,2,
             1,2,3

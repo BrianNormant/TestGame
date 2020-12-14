@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.lwjgl;
+package engine.lwjgl;
 
 import org.joml.Matrix2f;
 import org.joml.Matrix3f;
@@ -14,9 +14,9 @@ import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glUniform1f;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 
 public class Uniform {
     private final String name;

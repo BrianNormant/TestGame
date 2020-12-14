@@ -6,17 +6,8 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.logic.world.cube;
+package engine.graphic;
 
-import Bin.graphic.Texture;
-import org.joml.Matrix4f;
-
-public class Grass extends Cube {
-    private static final Texture texture = new Texture("grassblock");
-    public Grass() {
-        super();
-    }
-    public void render(Matrix4f viewMatrix) {
-        super.render(texture, viewMatrix);
-    }
+public interface RenderInstruction {
+    void render();
 }

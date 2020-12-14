@@ -6,9 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.logic;
+package engine;
 
-import Bin.graphic.Window;
+import engine.graphic.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
@@ -22,9 +22,8 @@ public class Control {
     public static GLFWKeyCallbackI windowControl = (window, key, scancode, action, mods) -> {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) glfwSetWindowShouldClose(window, true);
     };
-    public static void player(Player player, Window keyboard) {
+    public static void player(Camera camera, Window keyboard) {
         Vector3f positionOffset = new Vector3f(0);
-        Vector3f rotationOffset = new Vector3f(0);
         if (keyboard.isKeyPressed(GLFW_KEY_S)) {
             positionOffset.z += DISPLACEMENT_SENSITIVITY;
         }
@@ -43,22 +42,19 @@ public class Control {
         if (keyboard.isKeyPressed(GLFW_KEY_D)) {
             positionOffset.x += DISPLACEMENT_SENSITIVITY;
         }
-        if (keyboard.isKeyPressed(GLFW_KEY_Q)) {
-            rotationOffset.z += ROTATION_SENSITIVITY;
-        }
-        if (keyboard.isKeyPressed(GLFW_KEY_E)) {
-            rotationOffset.z -= ROTATION_SENSITIVITY;
-        }
 
-        player.displace(positionOffset);
+        camera.addPosition(positionOffset);
     }
-    public static void camera(Player player, Mouse mouse, Window keyboard) {
+    public static void camera(Camera camera, Mouse mouse, Window keyboard) {
         mouse.input();
         if (mouse.isLeftButtonPressed()) {
             Vector2f temp = mouse.getDisplVec();
             temp.y *= ROTATION_SENSITIVITY;
             temp.x *= ROTATION_SENSITIVITY;
-            player.addRotation(temp);
-        } else if (keyboard.isKeyPressed(GLFW_KEY_K)) player.setRotation(new Vector3f(0,0,0));
+            camera.addRotation(temp);
+        }
+        if (keyboard.isKeyPressed(GLFW_KEY_K)) camera.setRotation(new Vector3f(0));
+        if (keyboard.isKeyPressed(GLFW_KEY_N)) Item.addNew(camera.getPosition());
+        if (keyboard.isKeyPressed(GLFW_KEY_M)) Item.delete(0);
     }
 }

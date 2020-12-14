@@ -1,8 +1,8 @@
-package Bin.graphic;
+package engine.graphic;
 
-import Bin.logic.Control;
-import Bin.logic.Mouse;
-import Bin.logic.Player;
+import engine.Camera;
+import engine.Control;
+import engine.Mouse;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -74,14 +74,14 @@ public class Window {
     //Methods
     private void updateProjectionMatrix() {
         float aspectRatio = width/(float)height;
-        projectionMatrix = new Matrix4f().perspective(fieldOfView, aspectRatio, zNear, zFar);
+        projectionMatrix = new Matrix4f().perspective((float) Math.toRadians(fieldOfView), aspectRatio, zNear, zFar);
         Bin.Main.projectionMatrix = this.projectionMatrix;
     }
 
     public boolean isKeyPressed(int key) {
         return glfwGetKey(id, key) == GLFW_PRESS;
     }
-    public void render(Player player, Mouse mouse) {
+    public void render(Camera camera, Mouse mouse) {
         while (!glfwWindowShouldClose(this.id)) {
             glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
@@ -89,8 +89,8 @@ public class Window {
 
             glfwSwapBuffers(id);
             glfwPollEvents();
-            Control.camera(player, mouse, this);
-            Control.player(player, this);
+            Control.camera(camera, mouse, this);
+            Control.player(camera, this);
         }
     }
     //Getters

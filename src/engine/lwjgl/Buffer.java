@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin.lwjgl;
+package engine.lwjgl;
 
 import static org.lwjgl.opengl.GL15.*;
 
