@@ -9,6 +9,7 @@
 package engine;
 
 import engine.graphic.Model;
+import engine.graphic.ShaderUses;
 import engine.graphic.Texture;
 import engine.lwjgl.ShaderProgram;
 import org.joml.Matrix4f;
@@ -40,6 +41,7 @@ public class Item {
     private Texture texture;
     private Vector3f position, rotation;
     private float scale;
+    private final ShaderUses uses;
 
     private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", "camera","projection","model","texture","ambientLight");
     public static void delete(int id) {
@@ -49,18 +51,19 @@ public class Item {
     {
         references.add(this);
     }
-    public Item(Model model, Texture texture) {
-        this(model, texture, new Vector3f(), new Vector3f());
+    public Item(Model model, Texture texture, ShaderUses uses) {
+        this(model, texture, new Vector3f(), new Vector3f(),uses);
     }
-    public Item(Model model, Texture texture, Vector3f position, Vector3f rotation) {
-        this(model, texture, position, rotation, 1);
+    public Item(Model model, Texture texture, Vector3f position, Vector3f rotation, ShaderUses uses) {
+        this(model, texture, position, rotation, 1, uses);
     }
-    Item(Model model, Texture texture, Vector3f position, Vector3f rotation, float scale) {
+    Item(Model model, Texture texture, Vector3f position, Vector3f rotation, float scale, ShaderUses uses) {
         this.model = model;
         this.texture = texture;
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
+        this.uses = uses;
     }
     Matrix4f getModelMatrix() {
         Vector3f rotation = this.rotation;
@@ -91,7 +94,7 @@ public class Item {
     }
     public void render(Matrix4f cameraMatrix) {
         if (!show) return;
-        model.render(shader, texture, cameraMatrix, getModelMatrix());
+        model.render(shader, texture, this.uses, cameraMatrix, getModelMatrix());
     }
     public void delete() {
         references.remove(this);

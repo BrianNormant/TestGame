@@ -29,6 +29,10 @@ public class Game {
     }
 
     void launch() {
+        Cube[] land = new Cube[5*5];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++)land[i*j] = new Cube(new Texture("grassblock"),new Vector3f(i-2,-1,j-2), new Vector3f(0));
+        }
         Cube cube = new Cube(new Texture("diamond"));
         Light sun = new Light(new Vector3f(0,10,0), new Vector3f(0), new Vector3f(1),1);
 

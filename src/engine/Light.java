@@ -8,10 +8,23 @@
 
 package engine;
 
+import Bin.Main;
+import engine.graphic.ShaderUses;
 import engine.graphic.Texture;
+import engine.lwjgl.ShaderProgram;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class Light {
+    public static final ShaderProgram lightObjectShader = new ShaderProgram("vshad","lightfragment","camera","projection","model","texture");
+    public static final ShaderUses uses = (shader, uniformsData) -> lightObjectShader.use(new Object[]{
+            //Vertex Shader
+            uniformsData[0],//camera
+            Main.projectionMatrix,//projection
+            uniformsData[1], //model
+            //Fragment Shader
+            0,//texture
+    });
     public static Vector3f ambientLight = new Vector3f(.8902f,.6627f,.5333f);
     public static float ambientStrength = 0.1f;
 
@@ -20,7 +33,7 @@ public class Light {
     float intensity;
 
     {
-        place = new Cube(new Texture("sun"));
+        place = new Cube(new Texture("sun"), uses);
         color = new Vector3f(1);
         intensity = 1;
     }

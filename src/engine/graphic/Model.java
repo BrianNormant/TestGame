@@ -24,6 +24,7 @@ public class Model {
     private final VertexArray VAO;
     private final Buffer indices, vertices, texture;
     private final int length;
+
     public Model(int[] indices, float[] vertices, float[] texture) {
         length = indices.length;
         this.indices = new Buffer(GL_ELEMENT_ARRAY_BUFFER, 3);
@@ -36,18 +37,10 @@ public class Model {
 
         this.VAO = new VertexArray(this.indices, this.vertices, this.texture);
     }
-    public void render(ShaderProgram shader,Texture texture, Matrix4f cameraMatrix, Matrix4f modelViewMatrix) {
+    public void render(ShaderProgram shader,Texture texture,ShaderUses uses,Object... uniformsData) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture.id);
-        shader.use(new Object[]{
-                //Vertex Shader
-                cameraMatrix,//camera
-                Main.projectionMatrix,//projection
-                modelViewMatrix, //model
-                //Fragment Shader
-                0,//texture
-                new Vector4f(Light.ambientLight, Light.ambientStrength)//lightColor
-        });
+        uses.assign(shader, uniformsData);
 
         VAO.use(length);
 

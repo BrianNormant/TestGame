@@ -8,19 +8,37 @@
 
 package engine;
 
+import Bin.Main;
 import engine.graphic.Model;
+import engine.graphic.ShaderUses;
 import engine.graphic.Texture;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import static engine.graphic.Coords.*;
 
 public class Cube extends Item {
     private static final Model model = new Model(cubeIndices, cubeVertices, cubeTexture);
+    public static final ShaderUses uses = ((shader, uniformsData) -> shader.use(new Object[]{
+            //Vertex Shader
+            uniformsData[0],//camera
+            Main.projectionMatrix,//projection
+            uniformsData[1], //model
+            //Fragment Shader
+            0,//texture
+            new Vector4f(Light.ambientLight, Light.ambientStrength)//lightColor
+    }));
     public Cube(Texture texture) {
         this(texture,new Vector3f(0), new Vector3f(0));
     }
+    public Cube(Texture texture, ShaderUses uses) {
+        this(texture, new Vector3f(0), new Vector3f(0), uses);
+    }
     public Cube(Texture texture, Vector3f position, Vector3f rotation) {
-        super(model, texture, new Vector3f(position), new Vector3f(rotation));
+        super(model, texture, new Vector3f(position), new Vector3f(rotation), uses);
+    }
+    public Cube(Texture texture, Vector3f position, Vector3f rotation, ShaderUses uses) {
+        super(model, texture, new Vector3f(position), new Vector3f(rotation), uses);
     }
 }
