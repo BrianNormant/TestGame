@@ -8,15 +8,12 @@
 
 package engine.lwjgl;
 
-import org.joml.Matrix2f;
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
+import org.joml.*;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.FloatBuffer;
 
-import static org.lwjgl.opengl.GL20.glUniform1f;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Uniform {
     private final String name;
@@ -39,6 +36,10 @@ public class Uniform {
             glUniformMatrix4fv(getId(), false, toBuffer((Matrix4f) value));
         } else if ( value instanceof Integer ) {
             glUniform1f(getId(), (int)value);
+        } else if ( value instanceof Vector4f) {
+            glUniform4f(getId(), ((Vector4f)value).x, ((Vector4f)value).y, ((Vector4f)value).z, ((Vector4f)value).w);
+        } else if ( value instanceof Vector3f) {
+            glUniform3f(getId(), ((Vector3f)value).x, ((Vector3f)value).y, ((Vector3f)value).z);
         }
     }
     public static FloatBuffer toBuffer(Matrix4f matrix) {
@@ -54,6 +55,11 @@ public class Uniform {
     public static FloatBuffer toBuffer(Matrix2f matrix) {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             return matrix.get(stack.mallocFloat(4));
+        }
+    }
+    public static FloatBuffer toBuffer(Vector4f vector) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            return vector.get(stack.mallocFloat(4));
         }
     }
 }

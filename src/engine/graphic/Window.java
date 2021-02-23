@@ -1,7 +1,7 @@
 package engine.graphic;
 
 import engine.Camera;
-import engine.Control;
+import Bin.Control;
 import engine.Mouse;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -83,7 +83,7 @@ public class Window {
     }
     public void render(Camera camera, Mouse mouse) {
         while (!glfwWindowShouldClose(this.id)) {
-            glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
             instruction.render();
 
@@ -97,6 +97,7 @@ public class Window {
     public Matrix4f getProjectionMatrix() {
         return projectionMatrix;
     }
+
     //Setters
 
     public void setRenderInstruction(RenderInstruction instruction) {

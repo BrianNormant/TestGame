@@ -6,8 +6,11 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package engine;
+package Bin;
 
+import engine.Camera;
+import engine.Item;
+import engine.Mouse;
 import engine.graphic.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -47,12 +50,12 @@ public class Control {
     }
     public static void camera(Camera camera, Mouse mouse, Window keyboard) {
         mouse.input();
-        if (mouse.isLeftButtonPressed()) {
-            Vector2f temp = mouse.getDisplVec();
-            temp.y *= ROTATION_SENSITIVITY;
-            temp.x *= ROTATION_SENSITIVITY;
-            camera.addRotation(temp);
-        }
+
+        Vector2f temp = mouse.getDisplVec();
+        temp.y *= ROTATION_SENSITIVITY;
+        temp.x *= ROTATION_SENSITIVITY;
+        camera.addRotation(temp);
+
         if (keyboard.isKeyPressed(GLFW_KEY_K)) camera.setRotation(new Vector3f(0));
         if (keyboard.isKeyPressed(GLFW_KEY_N)) Item.addNew(camera.getPosition());
         if (keyboard.isKeyPressed(GLFW_KEY_M)) Item.delete(0);

@@ -9,10 +9,13 @@
 package engine.graphic;
 
 import Bin.Main;
+import engine.Item;
+import engine.Light;
 import engine.lwjgl.Buffer;
 import engine.lwjgl.ShaderProgram;
 import engine.lwjgl.VertexArray;
 import org.joml.Matrix4f;
+import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
@@ -36,20 +39,22 @@ public class Model {
     public void render(ShaderProgram shader,Texture texture, Matrix4f cameraMatrix, Matrix4f modelViewMatrix) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture.id);
-        shader.use(new Object[]{cameraMatrix, Main.projectionMatrix ,modelViewMatrix, 0});
+        shader.use(new Object[]{
+                //Vertex Shader
+                cameraMatrix,//camera
+                Main.projectionMatrix,//projection
+                modelViewMatrix, //model
+                //Fragment Shader
+                0,//texture
+                new Vector4f(Light.ambientLight, Light.ambientStrength)//lightColor
+        });
 
         VAO.use(length);
 
         glDrawElements(GL_TRIANGLES,length,GL_UNSIGNED_INT,0);
         glBindVertexArray(0);
     }
-    public void render(ShaderProgram shader, Texture texture, Matrix4f modelMatrix) {
-        texture.use();
 
-        shader.use(new Object[]{Main.projectionMatrix, modelMatrix, 0});
-
-        VAO.use(length);
-    }
     public void destroy() {
         this.indices.delete();
         this.vertices.delete();

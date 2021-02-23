@@ -39,6 +39,7 @@ public class Mouse {
             rightButtonPressed = button == GLFW_MOUSE_BUTTON_2 && action == GLFW_PRESS
             ;
         });
+        glfwSetInputMode(window.id, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
     public Vector2f getDisplVec() {
         return displVec;

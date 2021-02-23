@@ -11,9 +11,11 @@ package Bin;
 import engine.Camera;
 import engine.Cube;
 import engine.Item;
+import engine.Light;
 import engine.Mouse;
 import engine.graphic.Texture;
 import engine.graphic.Window;
+import org.joml.Vector3f;
 
 public class Game {
     private final Window window;
@@ -28,8 +30,10 @@ public class Game {
 
     void launch() {
         Cube cube = new Cube(new Texture("diamond"));
+        Light sun = new Light(new Vector3f(0,10,0), new Vector3f(0), new Vector3f(1),1);
+
+        Cube dirt = new Cube(new Texture("dirt"));
         window.setRenderInstruction(() -> {
-            cube.render(camera.getViewMatrix());
             Item.renderAll(camera.getViewMatrix());
         });
 
@@ -39,5 +43,6 @@ public class Game {
     public Window getWindow() {
         return window;
     }
+
 
 }

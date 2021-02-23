@@ -13,6 +13,7 @@ import engine.graphic.Texture;
 import engine.lwjgl.ShaderProgram;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class Item {
     private Vector3f position, rotation;
     private float scale;
 
-    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", "camera","projection","model","texture");
+    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", "camera","projection","model","texture","ambientLight");
     public static void delete(int id) {
         if (references.size() > 0)
             references.get(references.size() - 1).delete();
@@ -77,7 +78,7 @@ public class Item {
     public void setPosition(Vector3f position) {
         this.position = position;
     }
-    public void rotate(Vector3f offset) {
+    public void addRotation(Vector3f offset) {
         this.rotation.x += offset.x;
         this.rotation.y += offset.y;
         this.rotation.z += offset.z;
