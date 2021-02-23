@@ -28,6 +28,7 @@ Coords {
             -1,-1,0,
             1,-1,0
     };
+    //TODO Rewrite all the cube coordinates for solve the light issues
     public static final int[] cubeIndices = new int[]{
             0, 1, 3, 3, 1, 2,
             // Top Face
@@ -84,6 +85,7 @@ Coords {
             0.0f, 0.5f,
             0.5f, 0.5f,
             0.5f, 0.0f,
+
             0.0f, 0.0f,
             0.5f, 0.0f,
             0.0f, 0.5f,
@@ -106,12 +108,32 @@ Coords {
             1.0f, 0.5f
     };
     public static final float[] cubeNormals = new float[]{
+            //front face
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            //back face
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
-            0.0f, 0.0f, -1.0f,
-            0.0f, 0.0f, -1.0f,
+            //Top face
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            //right face
+            -1.0f,0.0f,0.0f,
+            -1.0f,0.0f,0.0f,
+            //left face
+            1.0f,0.0f,0.0f,
+            1.0f,0.0f,0.0f,
+            //bottom face
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
     };
 
     //TODO circle

@@ -28,7 +28,7 @@ public class Cube extends Item {
             //Fragment Shader
             0,//texture
             new Vector4f(Light.ambientLight, Light.ambientStrength),//lightColor
-            Light.REFERENCES.get(0).place.getPosition(),//lightPos
+            Light.REFERENCES.get(0).place.position,//lightPos
             Light.REFERENCES.get(0).color//lightColor
     }));
     public Cube(Texture texture) {

@@ -39,6 +39,7 @@ public class Game {
         Cube dirt = new Cube(new Texture("dirt"));
         window.setRenderInstruction(() -> {
             Item.renderAll(camera.getViewMatrix());
+            //sun.place.addPosition(new Vector3f(0.01f,0.0f,0));
         });
 
         window.render(camera, mouse);

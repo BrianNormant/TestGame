@@ -11,6 +11,6 @@ uniform mat4 model;
 void main() {
     gl_Position = projection*camera*model*vec4(position, 1.0f);
     textCoord = aTextCoord;
-    normal = aNormal;
+    normal = mat3(transpose(inverse(model)))*aNormal;
     fragPos = vec3(model*vec4(position, 1));
 }

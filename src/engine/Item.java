@@ -39,7 +39,7 @@ public class Item {
     private boolean show = true;
     private Model model;
     private Texture texture;
-    private Vector3f position, rotation;
+    public Vector3f position, rotation;
     private float scale;
     private final ShaderUses uses;
 
@@ -80,6 +80,11 @@ public class Item {
     }
     public void setPosition(Vector3f position) {
         this.position = position;
+    }
+    public void addPosition(Vector3f offset) {
+        this.position.x += offset.x;
+        this.position.y += offset.y;
+        this.position.z += offset.z;
     }
     public Vector3f getPosition() {
         return this.position;
