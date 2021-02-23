@@ -43,7 +43,7 @@ public class Item {
     private float scale;
     private final ShaderUses uses;
 
-    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", "camera","projection","model","texture","ambientLight");
+    private static final ShaderProgram shader = new ShaderProgram("vshad", "fshad", "camera","projection","model","texture","ambientLight","lightPos","lightColor");
     public static void delete(int id) {
         if (references.size() > 0)
             references.get(references.size() - 1).delete();
@@ -80,6 +80,9 @@ public class Item {
     }
     public void setPosition(Vector3f position) {
         this.position = position;
+    }
+    public Vector3f getPosition() {
+        return this.position;
     }
     public void addRotation(Vector3f offset) {
         this.rotation.x += offset.x;

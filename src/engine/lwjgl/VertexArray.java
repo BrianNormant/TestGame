@@ -29,10 +29,11 @@ public class VertexArray {
         addBuffer(indices);
         addBuffer(vertices);
     }
-    public VertexArray(Buffer indices, Buffer vertices, Buffer texture) {
+    public VertexArray(Buffer indices, Buffer vertices, Buffer texture, Buffer normals) {
         addBuffer(indices);
         addBuffer(vertices);
         addBuffer(texture);
+        addBuffer(normals);
     }
     //methods
     private void addLocate(int coordSize) {

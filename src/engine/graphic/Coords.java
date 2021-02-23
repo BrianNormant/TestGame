@@ -105,6 +105,14 @@ Coords {
             0.5f, 0.5f,
             1.0f, 0.5f
     };
+    public static final float[] cubeNormals = new float[]{
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+    };
 
     //TODO circle
     //TODO sphere

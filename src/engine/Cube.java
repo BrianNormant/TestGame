@@ -19,7 +19,7 @@ import org.joml.Vector4f;
 import static engine.graphic.Coords.*;
 
 public class Cube extends Item {
-    private static final Model model = new Model(cubeIndices, cubeVertices, cubeTexture);
+    private static final Model model = new Model(cubeIndices, cubeVertices, cubeTexture, cubeNormals);
     public static final ShaderUses uses = ((shader, uniformsData) -> shader.use(new Object[]{
             //Vertex Shader
             uniformsData[0],//camera
@@ -27,7 +27,9 @@ public class Cube extends Item {
             uniformsData[1], //model
             //Fragment Shader
             0,//texture
-            new Vector4f(Light.ambientLight, Light.ambientStrength)//lightColor
+            new Vector4f(Light.ambientLight, Light.ambientStrength),//lightColor
+            Light.REFERENCES.get(0).place.getPosition(),//lightPos
+            Light.REFERENCES.get(0).color//lightColor
     }));
     public Cube(Texture texture) {
         this(texture,new Vector3f(0), new Vector3f(0));

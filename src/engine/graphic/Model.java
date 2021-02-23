@@ -22,20 +22,22 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 
 public class Model {
     private final VertexArray VAO;
-    private final Buffer indices, vertices, texture;
+    private final Buffer indices, vertices, texture, normals;
     private final int length;
 
-    public Model(int[] indices, float[] vertices, float[] texture) {
+    public Model(int[] indices, float[] vertices, float[] texture, float[] normals) {
         length = indices.length;
         this.indices = new Buffer(GL_ELEMENT_ARRAY_BUFFER, 3);
         this.vertices = new Buffer(GL_ARRAY_BUFFER, 3);
         this.texture = new Buffer(GL_ARRAY_BUFFER, 2);
+        this.normals = new Buffer(GL_ARRAY_BUFFER, 3);
 
         this.indices.bufferData(indices);
         this.vertices.bufferData(vertices);
         this.texture.bufferData(texture);
+        this.normals.bufferData(normals);
 
-        this.VAO = new VertexArray(this.indices, this.vertices, this.texture);
+        this.VAO = new VertexArray(this.indices, this.vertices, this.texture, this.normals);
     }
     public void render(ShaderProgram shader,Texture texture,ShaderUses uses,Object... uniformsData) {
         glActiveTexture(GL_TEXTURE0);

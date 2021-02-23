@@ -34,7 +34,7 @@ public class Game {
             for (int j = 0; j < 5; j++)land[i*j] = new Cube(new Texture("grassblock"),new Vector3f(i-2,-1,j-2), new Vector3f(0));
         }
         Cube cube = new Cube(new Texture("diamond"));
-        Light sun = new Light(new Vector3f(0,10,0), new Vector3f(0), new Vector3f(1),1);
+        Light sun = new Light(new Vector3f(0,2,0), new Vector3f(0), new Vector3f(1),100);
 
         Cube dirt = new Cube(new Texture("dirt"));
         window.setRenderInstruction(() -> {

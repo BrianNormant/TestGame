@@ -13,9 +13,11 @@ import engine.graphic.ShaderUses;
 import engine.graphic.Texture;
 import engine.lwjgl.ShaderProgram;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
+
+import java.util.ArrayList;
 
 public class Light {
+    public static final ArrayList<Light> REFERENCES = new ArrayList<>();
     public static final ShaderProgram lightObjectShader = new ShaderProgram("vshad","lightfragment","camera","projection","model","texture");
     public static final ShaderUses uses = (shader, uniformsData) -> lightObjectShader.use(new Object[]{
             //Vertex Shader
@@ -36,6 +38,7 @@ public class Light {
         place = new Cube(new Texture("sun"), uses);
         color = new Vector3f(1);
         intensity = 1;
+        REFERENCES.add(this);
     }
     public Light(Vector3f position) {
         this.place.setPosition(position);
