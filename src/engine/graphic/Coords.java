@@ -28,112 +28,143 @@ Coords {
             -1,-1,0,
             1,-1,0
     };
-    //TODO Rewrite all the cube coordinates for solve the light issues
     public static final int[] cubeIndices = new int[]{
-            0, 1, 3, 3, 1, 2,
-            // Top Face
-            8, 10, 11, 9, 8, 11,
-            // Right face
-            12, 13, 7, 5, 12, 7,
-            // Left face
-            14, 15, 6, 4, 14, 6,
-            // Bottom face
-            16, 18, 19, 17, 16, 19,
             // Back face
-            4, 6, 7, 5, 4, 7,
+            0, 1, 2, 3, 4, 5,
+            // Front face
+            6, 7, 8, 9, 10, 11,
+            // Right face
+            12, 13, 14, 15, 16, 17,
+            // Left face
+            18, 19, 20, 21, 22, 23,
+            // Bottom face
+            24, 25, 26, 27, 28, 29,
+            // Top face
+            30, 31, 32, 33, 34, 35,
     };
     public static final float[] cubeVertices = new float[]{
-            -0.5f, 0.5f, 0.5f,
-            -0.5f, -0.5f, 0.5f,
-            0.5f, -0.5f, 0.5f,
-            0.5f, 0.5f, 0.5f,
-            -0.5f, 0.5f, -0.5f,
-            0.5f, 0.5f, -0.5f,
             -0.5f, -0.5f, -0.5f,
             0.5f, -0.5f, -0.5f,
-            // For text coords in top face
-            // V8: V4 repeated
-            -0.5f, 0.5f, -0.5f,
-            // V9: V5 repeated
             0.5f, 0.5f, -0.5f,
-            // V10: V0 repeated
-            -0.5f, 0.5f, 0.5f,
-            // V11: V3 repeated
-            0.5f, 0.5f, 0.5f,
-            // For text coords in right face
-            // V12: V3 repeated
-            0.5f, 0.5f, 0.5f,
-            // V13: V2 repeated
-            0.5f, -0.5f, 0.5f,
-            // For text coords in left face
-            // V14: V0 repeated
-            -0.5f, 0.5f, 0.5f,
-            // V15: V1 repeated
-            -0.5f, -0.5f, 0.5f,
-            // For text coords in bottom face
-            // V16: V6 repeated
+            0.5f, 0.5f, -0.5f,
+            -0.5f, 0.5f, -0.5f,
             -0.5f, -0.5f, -0.5f,
-            // V17: V7 repeated
-            0.5f, -0.5f, -0.5f,
-            // V18: V1 repeated
+
             -0.5f, -0.5f, 0.5f,
-            // V19: V2 repeated
             0.5f, -0.5f, 0.5f,
+            0.5f, 0.5f, 0.5f,
+            0.5f, 0.5f, 0.5f,
+            -0.5f, 0.5f, 0.5f,
+            -0.5f, -0.5f, 0.5f,
+
+            -0.5f, 0.5f, 0.5f,
+            -0.5f, 0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f, 0.5f,
+            -0.5f, 0.5f, 0.5f,
+
+            0.5f, 0.5f, 0.5f,
+            0.5f, 0.5f, -0.5f,
+            0.5f, -0.5f, -0.5f,
+            0.5f, -0.5f, -0.5f,
+            0.5f, -0.5f, 0.5f,
+            0.5f, 0.5f, 0.5f,
+
+            -0.5f, -0.5f, -0.5f,
+            0.5f, -0.5f, -0.5f,
+            0.5f, -0.5f, 0.5f,
+            0.5f, -0.5f, 0.5f,
+            -0.5f, -0.5f, 0.5f,
+            -0.5f, -0.5f, -0.5f,
+
+            -0.5f, 0.5f, -0.5f,
+            0.5f, 0.5f, -0.5f,
+            0.5f, 0.5f, 0.5f,
+            0.5f, 0.5f, 0.5f,
+            -0.5f, 0.5f, 0.5f,
+            -0.5f, 0.5f, -0.5f,
     };
     public static final float[] cubeTexture = new float[]{
-            0.0f, 0.0f,
-            0.0f, 0.5f,
-            0.5f, 0.5f,
-            0.5f, 0.0f,
+            0.25f, 1.0f,//top left
+            0.00f, 1.0f,//top right
+            0.00f, 0.5f,//bottom right
+            0.00f, 0.5f,//bottom right
+            0.25f, 0.5f,//bottom left
+            0.25f, 1.0f,//top left
 
-            0.0f, 0.0f,
-            0.5f, 0.0f,
-            0.0f, 0.5f,
-            0.5f, 0.5f,
-            // For text coords in top face
-            0.0f, 0.5f,
-            0.5f, 0.5f,
-            0.0f, 1.0f,
-            0.5f, 1.0f,
-            // For text coords in right face
-            0.0f, 0.0f,
-            0.0f, 0.5f,
-            // For text coords in left face
-            0.5f, 0.0f,
-            0.5f, 0.5f,
-            // For text coords in bottom face
-            0.5f, 0.0f,
-            1.0f, 0.0f,
-            0.5f, 0.5f,
-            1.0f, 0.5f
+            0.00f, 1.0f-0.5f,//top left
+            0.25f, 1.0f-0.5f,//top right
+            0.25f, 0.5f-0.5f,//bottom right
+            0.25f, 0.5f-0.5f,//bottom right
+            0.00f, 0.5f-0.5f,//bottom left
+            0.00f, 1.0f-0.5f,//top left
+
+            /*0*/1.00f,  0.0f,//top left
+            /*1*/0.75f,  0.0f,//top right
+            /*2*/0.75f,  0.5f,//bottom right
+            /*3*/0.75f,  0.5f,//bottom right
+            /*4*/1.00f,  0.5f,//bottom left
+            /*5*/1.00f,  0.0f,//top left
+
+            /*0*/0.75f-0.25f,  0.0f,//top left
+            /*1*/1.00f-0.25f,  0.0f,//top right
+            /*2*/1.00f-0.25f,  0.5f,//bottom right
+            /*3*/1.00f-0.25f,  0.5f,//bottom right
+            /*4*/0.75f-0.25f,  0.5f,//bottom left
+            /*5*/0.75f-0.25f,  0.0f,//top left
+
+            0.25f,  0.5f+0.5f,
+            0.5f,   0.5f+0.5f,
+            0.5f,   0.0f+0.5f,
+            0.5f,   0.0f+0.5f,
+            0.25f,  0.0f+0.5f,
+            0.25f,  0.5f+0.5f,
+
+            0.25f,  0.5f,
+            0.5f,   0.5f,
+            0.5f,   0.0f,
+            0.5f,   0.0f,
+            0.25f,  0.0f,
+            0.25f,  0.5f,
     };
     public static final float[] cubeNormals = new float[]{
-            //front face
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            //back face
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
             0.0f, 0.0f, -1.0f,
-            //Top face
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            //right face
-            -1.0f,0.0f,0.0f,
-            -1.0f,0.0f,0.0f,
-            //left face
-            1.0f,0.0f,0.0f,
-            1.0f,0.0f,0.0f,
-            //bottom face
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
             0.0f, -1.0f, 0.0f,
             0.0f, -1.0f, 0.0f,
             0.0f, -1.0f, 0.0f,
             0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
     };
 
     //TODO circle
