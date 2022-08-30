@@ -8,7 +8,7 @@
 
 package engine.lwjgl;
 
-import Bin.Main;
+import bin.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;

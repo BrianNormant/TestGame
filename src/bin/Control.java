@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin;
+package bin;
 
 import engine.Camera;
 import engine.Item;

@@ -1,7 +1,7 @@
 package engine.graphic;
 
+import bin.Control;
 import engine.Camera;
-import Bin.Control;
 import engine.Mouse;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -75,7 +75,7 @@ public class Window {
     private void updateProjectionMatrix() {
         float aspectRatio = width/(float)height;
         projectionMatrix = new Matrix4f().perspective((float) Math.toRadians(fieldOfView), aspectRatio, zNear, zFar);
-        Bin.Main.projectionMatrix = this.projectionMatrix;
+        bin.Main.projectionMatrix = this.projectionMatrix;
     }
 
     public boolean isKeyPressed(int key) {

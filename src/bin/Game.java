@@ -6,13 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu. Brian Normant 2003 -> Today
  */
 
-package Bin;
+package bin;
 
-import engine.Camera;
-import engine.Cube;
-import engine.Item;
-import engine.Light;
-import engine.Mouse;
+import engine.*;
 import engine.graphic.Texture;
 import engine.graphic.Window;
 import org.joml.Vector3f;
@@ -34,12 +30,13 @@ public class Game {
             for (int j = 0; j < 5; j++)land[i*j] = new Cube(new Texture("grassblock"),new Vector3f(i-2,-1,j-2), new Vector3f(0));
         }
         Cube cube = new Cube(new Texture("diamond"));
-        Light sun = new Light(new Vector3f(0,2,0), new Vector3f(0), new Vector3f(1),100);
+        Light sun = new Light(new Vector3f(0,2,0), new Vector3f(0), new Vector3f(1),100),
+                moon = new Light(new Vector3f(2,0,0),new Vector3f(0), new Vector3f(1), 100);
 
         Cube dirt = new Cube(new Texture("dirt"));
         window.setRenderInstruction(() -> {
             Item.renderAll(camera.getViewMatrix());
-            //sun.place.addPosition(new Vector3f(0.01f,0.0f,0));
+            sun.place.addPosition(new Vector3f(0.001f,0.0f,0));
         });
 
         window.render(camera, mouse);

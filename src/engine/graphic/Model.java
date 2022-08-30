@@ -8,14 +8,9 @@
 
 package engine.graphic;
 
-import Bin.Main;
-import engine.Item;
-import engine.Light;
 import engine.lwjgl.Buffer;
 import engine.lwjgl.ShaderProgram;
 import engine.lwjgl.VertexArray;
-import org.joml.Matrix4f;
-import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;

@@ -8,7 +8,7 @@
 
 package engine;
 
-import Bin.Main;
+import bin.Main;
 import engine.graphic.ShaderUses;
 import engine.graphic.Texture;
 import engine.lwjgl.ShaderProgram;

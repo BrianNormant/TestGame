@@ -8,8 +8,7 @@
 
 package engine.graphic;
 
-public class
-Coords {
+public class Coords {
     public static final int[] squareIndices = new int[]{
             0,1,2,
             1,2,3
@@ -169,4 +168,5 @@ Coords {
 
     //TODO circle
     //TODO sphere
+    //TODO complex custom model reader
 }
