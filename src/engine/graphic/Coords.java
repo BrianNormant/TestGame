@@ -166,7 +166,59 @@ public class Coords {
             0.0f, 1.0f, 0.0f,
     };
 
-    //TODO circle
+    public static final int CIRCLE_COMPLEXITY = 250;
+    public static final float[] circleVertices;
+    //Building vertices for circle
+    static {
+        float[] temp = new float[CIRCLE_COMPLEXITY *3+3];
+        for (int i = 0; i < CIRCLE_COMPLEXITY; i++) {
+            double angleDelta = 2*Math.PI/ CIRCLE_COMPLEXITY;
+            temp[3*i] = (float) Math.sin(angleDelta*i);
+            temp[3*i+1] = (float) Math.cos(angleDelta*i);
+            temp[3*i+2] = 0;
+        }
+        //setting the center of the circle at 0,0,0
+        temp[temp.length-1] = 0;
+        temp[temp.length-2] = 0;
+        temp[temp.length-3] = 0;
+        circleVertices = temp;
+    }
+    public static final int[] circleIndices;
+    static {
+        int[] temp = new int[circleVertices.length-3];
+        for (int i = 0; i < CIRCLE_COMPLEXITY; i++) {
+            temp[3*i] = i;
+            temp[3*i+1] = i+1;
+            temp[3*i+2] = CIRCLE_COMPLEXITY;
+        }
+        temp[temp.length-1] = CIRCLE_COMPLEXITY;
+        temp[temp.length-2] = CIRCLE_COMPLEXITY -1;
+        temp[temp.length-3] = 0;
+
+
+        circleIndices = temp;
+    }
+    //public static final float[] circleNormals;
+
     //TODO sphere
+    //For drawing a sphere
+    // iterate from top to bottom
+    //
+    public static final int SPHERE_X_COMPLEXITY = 4;
+    public static final int SPHERE_Y_COMPLEXITY = 1;//How many layer between the top and bottom the sphere have, must be 1 or greater
+    //public static final float[] sphereIndices;
+    static {
+        float[] temp = new float[(2 + SPHERE_Y_COMPLEXITY*SPHERE_X_COMPLEXITY) * 3];
+        // point 0 is the top
+        temp[0] = 0;
+        temp[1] = 1;
+        temp[2] = 0;
+        // last point is the bottom
+        temp[temp.length-3] = 0;
+        temp[temp.length-2] = -1;
+        temp[temp.length-1] = 0;
+
+        //float deltaY
+    }
     //TODO complex custom model reader
 }

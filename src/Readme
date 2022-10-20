@@ -1,0 +1,2 @@
+To test if every dependency is here try to execute HelloTriangle.
+Dependency are LWJGL, joml, and pngdecoder.

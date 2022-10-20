@@ -11,13 +11,14 @@ import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
 
+import static engine.graphic.Coords.circleIndices;
+import static engine.graphic.Coords.circleVertices;
 import static java.sql.Types.NULL;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_CORE_PROFILE;
 import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class HelloTriangle {
-    //This class is a exemple off how show a triangle on a window.
+    //This class is an exemple off how show a triangle on a window.
     static long window;
     public static void main(String[] args) {
         GLFWErrorCallback.createPrint(System.err).set();
@@ -57,10 +58,8 @@ public class HelloTriangle {
 
         GL.createCapabilities();
 
-        float[] vertices = {-0.5f,-0.5f,0f,
-                0.5f, -0.5f, 0f,
-                0f,0.5f,0f};
-        int[] indices = {0,1,2};
+        float[] vertices = circleVertices;
+        int[] indices = circleIndices;
         Mesh meshmeyek = MeshLoader.createMesh(vertices,indices);
 
         while(!GLFW.glfwWindowShouldClose(window)) {
